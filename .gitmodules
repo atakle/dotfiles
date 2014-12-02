@@ -40,3 +40,6 @@
 [submodule "vim/bundle/glsl"]
 	path = vim/bundle/glsl
 	url = https://github.com/tikhomirov/vim-glsl.git
+[submodule "xcompose"]
+	path = xcompose
+	url = https://github.com/kragen/xcompose
