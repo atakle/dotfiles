@@ -10,12 +10,14 @@
 [submodule "vim/bundle/swap"]
 	path = vim/bundle/swap
 	url = https://github.com/kurkale6ka/vim-swap.git
+    ignore = dirty
 [submodule "vim/bundle/repeat"]
 	path = vim/bundle/repeat
 	url = https://github.com/tpope/vim-repeat.git
 [submodule "vim/bundle/vimroom"]
 	path = vim/bundle/vimroom
 	url = https://github.com/mikewest/vimroom.git
+	ignore = dirty
 [submodule "vim/bundle/easymotion"]
 	path = vim/bundle/easymotion
 	url = git://github.com/Lokaltog/vim-easymotion.git
