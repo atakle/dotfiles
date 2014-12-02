@@ -1,0 +1,24 @@
+# Paths to the oh-my-zsh configuration
+ZSH=$HOME/.zsh/oh-my-zsh
+ZSH_CUSTOM=$HOME/.zsh
+
+ZSH_THEME="theme"
+
+plugins=(battery screen vi-mode)
+
+# Load local settings, if they are present
+if [[ -f $ZSH_CUSTOM/local.zsh ]]; then
+    source $ZSH_CUSTOM/local.zsh
+fi
+
+# No automatic oh-my-zsh updates
+DISABLE_AUTO_UPDATE=true
+
+CASE_SENSITIVE=true
+
+source $ZSH/oh-my-zsh.sh
+
+# Use screen if it's available and we're not already using it.
+if [[ -z "$STY" && "$TERM" != "screen-bce" && -x $(which screen) ]]; then
+    exec screen -RR
+fi

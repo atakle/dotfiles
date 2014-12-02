@@ -1,0 +1,11 @@
+[color]
+	ui = auto
+[core]
+	editor = vim
+[format]
+	suffix = .txt
+[user]
+	name  = Anne Takle
+	email = annetak@stud.ntnu.no
+[push]
+	default = simple

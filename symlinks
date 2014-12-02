@@ -1,0 +1,10 @@
+editrc               .editrc
+gitconfig            .gitconfig
+inputrc              .inputrc
+lesskey              .lesskey
+screenrc             .screenrc
+vim                  .vim
+vim/vimrc            .vimrc
+xcompose/dotXCompose .XCompose
+zsh                  .zsh
+zsh/zshrc            .zshrc
