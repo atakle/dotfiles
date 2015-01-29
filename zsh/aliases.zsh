@@ -2,7 +2,8 @@ alias vi='vim'
 compdef _vim vi=vim
 
 # Coloured diffs
-alias diff='colordiff'
+whence -p colordiff > /dev/null && \
+    alias diff='colordiff'
 
 # Coloured pacman output, and some shortcuts
 if [ -x /usr/bin/pacman ]; then
