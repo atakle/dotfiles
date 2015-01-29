@@ -166,7 +166,7 @@ vnoremap <silent> <leader>=    :sort<cr>
 inoremap <C-u> <ESC>viwUea
 
 " Remove trailing whitespace
-nnoremap <silent> <leader>ds mt:%s/\s\+$//g<cr>`t
+nnoremap <silent> <leader>ds mt:%s/\s\+$//ge<cr>`t
 
 " Toggle highlighting of trailing whitespace. For those files that
 " contain lots of it, but are not ours to edit. This function expects
