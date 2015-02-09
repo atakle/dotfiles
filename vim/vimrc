@@ -161,9 +161,16 @@ map <F1> <nop>
 nnoremap Q gwap
 nnoremap <leader>Q Q
 
-" Sort the lines in a paragraph
-nnoremap <silent> <leader>= vip:sort<cr>
-vnoremap <silent> <leader>=    :sort<cr>
+" Operator-pending mapping for sorting lines.
+function! g:SortOperator(type)
+    if a:type ==? 'v'
+        execute "normal! `<V`>:sort\<cr>"
+    elseif a:type ==# 'line'
+        execute "normal! `[V`]:sort\<cr>"
+    endif
+endfunction
+nnoremap <silent> <leader>= :set operatorfunc=SortOperator<cr>g@
+vnoremap <silent> <leader>= :<c-u>call SortOperator(visualmode())<cr>
 
 " Insert mode convert to upper-case
 inoremap <C-u> <ESC>viwUea
