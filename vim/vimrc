@@ -124,6 +124,9 @@ inoremap jk <esc>
 nnoremap <leader>o o<esc>
 nnoremap <leader>O O<esc>
 
+" Copy to the end of the line with Y, instead of the whole line.
+nnoremap Y y$
+
 "Toggle hlsearch
 nnoremap <leader>h  :set hlsearch!<cr>
 
