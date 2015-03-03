@@ -195,6 +195,29 @@ function! g:ToggleListcharsTrail()
 endfunction
 nnoremap <silent> <leader>st :call g:ToggleListcharsTrail()<cr>
 
+" Command line movement. Prepend the normal vim movement keys with the alt key
+" to use them in command mode. The mappings for the terminal assumes that the
+" alt-key sends an escape character.
+if has("gui_running")
+    cnoremap <M-H> <Left>
+    cnoremap <M-L> <Right>
+    cnoremap <M-B> <S-Left>
+    cnoremap <M-W> <S-Right>
+    cnoremap <M-0> <Home>
+    cnoremap <M-A> <Home>
+    cnoremap <M-E> <End>
+    cnoremap <M-X> <Delete>
+else
+    cnoremap <ESC>h <Left>
+    cnoremap <ESC>l <Right>
+    cnoremap <ESC>b <S-Left>
+    cnoremap <ESC>w <S-Right>
+    cnoremap <ESC>0 <Home>
+    cnoremap <ESC>a <Home>
+    cnoremap <ESC>e <End>
+    cnoremap <ESC>x <Delete>
+endif
+
 " Type "normal" faster
 cnoremap NN normal<space>
 
