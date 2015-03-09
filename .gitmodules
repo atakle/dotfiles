@@ -45,3 +45,9 @@
 [submodule "xcompose"]
 	path = xcompose
 	url = https://github.com/kragen/xcompose
+[submodule "vim/bundle/indent-object"]
+	path = vim/bundle/indent-object
+	url = https://github.com/michaeljsmith/vim-indent-object.git
+[submodule "vim/bundle/dirsettings"]
+	path = vim/bundle/dirsettings
+	url = https://github.com/mantiz/vim-plugin-dirsettings.git

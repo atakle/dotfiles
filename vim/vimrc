@@ -74,6 +74,9 @@ command! Rootwrite w !sudo tee % > /dev/null
 
 if has("autocmd")
 
+    " Enable dirsettings
+    call dirsettings#Install()
+
     " Enable Pathogen if it is available
     runtime bundle/pathogen/autoload/pathogen.vim
     if exists("*pathogen#infect")
@@ -121,6 +124,9 @@ inoremap jk <esc>
 nnoremap <leader>o o<esc>
 nnoremap <leader>O O<esc>
 
+" Copy to the end of the line with Y, instead of the whole line.
+nnoremap Y y$
+
 "Toggle hlsearch
 nnoremap <leader>h  :set hlsearch!<cr>
 
@@ -158,9 +164,16 @@ map <F1> <nop>
 nnoremap Q gwap
 nnoremap <leader>Q Q
 
-" Sort the lines in a paragraph
-nnoremap <silent> <leader>= vip:sort<cr>
-vnoremap <silent> <leader>=    :sort<cr>
+" Operator-pending mapping for sorting lines.
+function! g:SortOperator(type)
+    if a:type ==? 'v'
+        execute "normal! `<V`>:sort\<cr>"
+    elseif a:type ==# 'line'
+        execute "normal! `[V`]:sort\<cr>"
+    endif
+endfunction
+nnoremap <silent> <leader>= :set operatorfunc=SortOperator<cr>g@
+vnoremap <silent> <leader>= :<c-u>call SortOperator(visualmode())<cr>
 
 " Insert mode convert to upper-case
 inoremap <C-u> <ESC>viwUea
@@ -181,6 +194,29 @@ function! g:ToggleListcharsTrail()
     let &l:listchars = l:lcs
 endfunction
 nnoremap <silent> <leader>st :call g:ToggleListcharsTrail()<cr>
+
+" Command line movement. Prepend the normal vim movement keys with the alt key
+" to use them in command mode. The mappings for the terminal assumes that the
+" alt-key sends an escape character.
+if has("gui_running")
+    cnoremap <M-H> <Left>
+    cnoremap <M-L> <Right>
+    cnoremap <M-B> <S-Left>
+    cnoremap <M-W> <S-Right>
+    cnoremap <M-0> <Home>
+    cnoremap <M-A> <Home>
+    cnoremap <M-E> <End>
+    cnoremap <M-X> <Delete>
+else
+    cnoremap <ESC>h <Left>
+    cnoremap <ESC>l <Right>
+    cnoremap <ESC>b <S-Left>
+    cnoremap <ESC>w <S-Right>
+    cnoremap <ESC>0 <Home>
+    cnoremap <ESC>a <Home>
+    cnoremap <ESC>e <End>
+    cnoremap <ESC>x <Delete>
+endif
 
 " Type "normal" faster
 cnoremap NN normal<space>
