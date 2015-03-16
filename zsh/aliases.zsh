@@ -14,6 +14,3 @@ fi
 
 alias la="ls -A"
 alias find="noglob find"
-
-# vimdiff with root privileges
-alias sudodiff="env EDITOR=vimdiff sudo -e"
