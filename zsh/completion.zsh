@@ -1,6 +1,6 @@
 # Start the completion system.
 autoload -U compinit
-compinit -d "$ZDOTDIR/zcompdump"
+compinit -d "$ZSH_DIR/zcompdump"
 
 setopt complete_in_word
 setopt auto_menu

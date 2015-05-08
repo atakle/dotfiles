@@ -1,5 +1,5 @@
 if [ -z "$HISTFILE" ]; then
-    HISTFILE=$ZDOTDIR/zsh_history
+    HISTFILE=$ZSH_DIR/zsh_history
 fi
 
 HISTSIZE=50000
