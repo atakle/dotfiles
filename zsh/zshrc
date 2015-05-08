@@ -30,7 +30,8 @@ conf_files=( env
              functions
              aliases
              history
-             key-bindings )
+             key-bindings
+             prompt )
 
 # Source the configuration files.
 for f in "${conf_files[@]}"; do

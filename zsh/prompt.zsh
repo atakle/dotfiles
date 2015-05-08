@@ -9,13 +9,14 @@ local prompt_dir="%B%F{blue}%3~%b%f"
 local prompt_char="\$(vi_mode_prompt_info)%#%f"
 
 # Vi normal mode changes the colour of $prompt_char.
-MODE_INDICATOR="%F{red}"
+# MODE_INDICATOR="%F{red}"
 
-PROMPT="[$prompt_userhost $prompt_dir]$prompt_char "
+PROMPT="[$prompt_userhost $prompt_dir]%# "
 
-ZSH_THEME_GIT_PROMPT_PREFIX="("
-ZSH_THEME_GIT_PROMPT_SUFFIX=")"
-ZSH_THEME_GIT_PROMPT_DIRTY=" %F{yellow}✘%f"
-ZSH_THEME_GIT_PROMPT_CLEAN=" %B%F{green}✔%b%f"
+# ZSH_THEME_GIT_PROMPT_PREFIX="("
+# ZSH_THEME_GIT_PROMPT_SUFFIX=")"
+# ZSH_THEME_GIT_PROMPT_DIRTY=" %F{yellow}✘%f"
+# ZSH_THEME_GIT_PROMPT_CLEAN=" %B%F{green}✔%b%f"
 
-RPROMPT="\$(git_prompt_info)\${\$(battery_pct_prompt)/\\[/ [}%(1j. {%j}.)"
+# RPROMPT="\$(git_prompt_info)\${\$(battery_pct_prompt)/\\[/ [}%(1j. {%j}.)"
+RPROMPT="%(1j. {%j}.)"
