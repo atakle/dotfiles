@@ -30,6 +30,7 @@ conf_files=( aliases
              completion
              env
              functions
+             history
              key-bindings )
 
 # Source the configuration files.
