@@ -3,13 +3,16 @@ bindkey -v
 # More time to type composite commands
 export KEYTIMEOUT=100
 
-bindkey "jk" "vi-cmd-mode"
-bindkey "[1~" "beginning-of-line" # HOME
-bindkey "[4~" "end-of-line"       # END
+bindkey "jk"    "vi-cmd-mode"
+bindkey "[1~" "beginning-of-line"    # HOME
+bindkey "[4~" "end-of-line"          # END
+bindkey "^H"    "backward-delete-char" # BACKSPACE
 
 bindkey -a "u"  "undo"
 bindkey -a "^R" "redo"
-bindkey -a "V" "edit-command-line"
+
+autoload -Uz edit-command-line
+bindkey -a "V" edit-command-line
 
 # Emulate the change/delete inside/around symbol operations from vim. Will
 # behave oddly if not used inside a pair of symbols.
