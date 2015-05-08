@@ -19,12 +19,12 @@ if whence -p screen > /dev/null; then
 fi
 
 # Paths to the oh-my-zsh configuration
-ZSH=$HOME/.zsh/oh-my-zsh
-ZSH_CUSTOM=$HOME/.zsh
+#ZSH=$HOME/.zsh/oh-my-zsh
+#ZSH_CUSTOM=$HOME/.zsh
 
-ZSH_THEME="theme"
+#ZSH_THEME="theme"
 
-plugins=(battery screen vi-mode)
+#plugins=(battery screen vi-mode)
 
 # Load local settings, if they are present
 if [[ -f $ZSH_CUSTOM/local.zsh ]]; then
@@ -32,8 +32,8 @@ if [[ -f $ZSH_CUSTOM/local.zsh ]]; then
 fi
 
 # No automatic oh-my-zsh updates
-DISABLE_AUTO_UPDATE=true
+#DISABLE_AUTO_UPDATE=true
 
-CASE_SENSITIVE=true
+#CASE_SENSITIVE=true
 
-source $ZSH/oh-my-zsh.sh
+#source $ZSH/oh-my-zsh.sh
