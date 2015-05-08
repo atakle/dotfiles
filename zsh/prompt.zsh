@@ -6,8 +6,9 @@ if [ -z "$zsh_prompt_colour" ]; then
     zsh_prompt_colour="green"
 fi
 
-# Load vi-mode functionality.
+# Add some additional functionality.
 source "$ZSH_DIR/vi-mode.zsh"
+source "$ZSH_DIR/vcs.zsh"
 
 # Calling vi_mode_prompt_info will print the value of MODE_INDICATOR when in
 # normal mode. Use this to make the prompt character red.
@@ -29,9 +30,7 @@ local prt_char="\$(vi_mode_prompt_info)%#%f"
 
 PROMPT="[$prt_color$prt_userhost $prt_dir]$prt_char "
 
-# ZSH_THEME_GIT_PROMPT_PREFIX="("
-# ZSH_THEME_GIT_PROMPT_SUFFIX=")"
-# ZSH_THEME_GIT_PROMPT_DIRTY=" %F{yellow}✘%f"
-# ZSH_THEME_GIT_PROMPT_CLEAN=" %B%F{green}✔%b%f"
+local prt_vcs="\${vcs_info_msg_0_}" # Version control info.
+local prt_jobs="%(1j. {%j}.)"       # Number of background jobs, if any.
 
-# RPROMPT="\$(git_prompt_info)\${\$(battery_pct_prompt)/\\[/ [}%(1j. {%j}.)"
+RPOMPT="$prt_vcs$prt_jobs"
