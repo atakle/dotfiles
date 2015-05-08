@@ -16,7 +16,7 @@ MODE_INDICATOR="%F{red}"
 
 # Colour of the user@host string. It is red for root and $zsh_prompt_colour for
 # everyone else.
-local prt_colour="%B%(!.%F{red}.$F{$zsh_prompt_colour})"
+local prt_colour="%B%(!.%F{red}.%F{$zsh_prompt_colour})"
 
 # The user@host string.
 local prt_userhost="%n@%m%b%f"
@@ -28,7 +28,7 @@ local prt_dir="%B%F{blue}%3~%b%f"
 # vi normal mode.
 local prt_char="\$(vi_mode_prompt_info)%#%f"
 
-PROMPT="[$prt_color$prt_userhost $prt_dir]$prt_char "
+PROMPT="[$prt_colour$prt_userhost $prt_dir]$prt_char "
 
 local prt_vcs="\${vcs_info_msg_0_}" # Version control info.
 local prt_jobs="%(1j. {%j}.)"       # Number of background jobs, if any.
