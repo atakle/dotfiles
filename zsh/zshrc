@@ -26,10 +26,10 @@ fi
 
 # Which configuration files to read
 local -a conf_files
-conf_files=( aliases
+conf_files=( env
              completion
-             env
              functions
+             aliases
              history
              key-bindings )
 
