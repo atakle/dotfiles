@@ -18,22 +18,26 @@ if whence -p screen > /dev/null; then
     fi
 fi
 
-# Paths to the oh-my-zsh configuration
-#ZSH=$HOME/.zsh/oh-my-zsh
-#ZSH_CUSTOM=$HOME/.zsh
-
-#ZSH_THEME="theme"
-
-#plugins=(battery screen vi-mode)
-
-# Load local settings, if they are present
-if [[ -f $ZSH_CUSTOM/local.zsh ]]; then
-    source $ZSH_CUSTOM/local.zsh
+# Default location of the zsh configuration. Define it in ~/.zshenv to
+# override.
+if [ -z "$ZDOTDIR" ]; then
+    ZDOTDIR="$HOME/.zsh"
 fi
 
-# No automatic oh-my-zsh updates
-#DISABLE_AUTO_UPDATE=true
+# Which configuration files to read
+local -a conf_files
+conf_files=( aliases
+             completion
+             env
+             functions
+             key-bindings )
 
-#CASE_SENSITIVE=true
+# Source the configuration files.
+for f in "${conf_files[@]}"; do
+    source "$ZDOTDIR/$f.zsh"
+done
 
-#source $ZSH/oh-my-zsh.sh
+# Load local settings, if they are present
+if [ -f $ZDOTDIR/local.zsh ]; then
+    source $ZDOTDIR/local.zsh
+fi
