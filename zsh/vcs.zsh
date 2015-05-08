@@ -21,9 +21,9 @@ zstyle ':vcs_info:*' get-unapplied true
 function +vi-git-countformat() {
     # Display formats for staged, modified and untracked files, respectively.
     # The `0' will be replaced by the corresponding number of files.
-    local prt_git_s=" %B%F{green}+0%b%f"
+    local prt_git_s=" %F{green}+0%f"
     local prt_git_m=" %F{yellow}x0%f"
-    local prt_git_u=" %B%F{yellow}?0%b%f"
+    local prt_git_u=" %F{magenta}?0%f"
 
     # Run only if the repository is dirty.
     if [ -n "${hook_com[unstaged]}${hook_com[staged]}" ]; then
