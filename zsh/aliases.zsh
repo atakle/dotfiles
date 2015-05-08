@@ -12,5 +12,9 @@ if [ -x /usr/bin/pacman ]; then
     alias pss='pacman -Ss'
 fi
 
-alias la="ls -A"
-alias find="noglob find"
+alias ls='ls --color=auto'
+alias l='ls -lA'
+alias ll='ls -l'
+alias la='ls -A'
+
+alias find='noglob find'
