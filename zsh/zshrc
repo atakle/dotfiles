@@ -28,6 +28,7 @@ local -a conf_files
 conf_files=( env
              completion
              functions
+             directories
              aliases
              history
              key-bindings

@@ -17,4 +17,6 @@ alias l='ls -lA'
 alias ll='ls -l'
 alias la='ls -A'
 
+alias po='popd'
+
 alias find='noglob find'
