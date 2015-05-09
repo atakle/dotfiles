@@ -8,11 +8,23 @@ bindkey "[1~" "beginning-of-line"    # HOME
 bindkey "[4~" "end-of-line"          # END
 bindkey "^H"    "backward-delete-char" # BACKSPACE
 
+# Upper-case the word to the left of the cursor.
+function viins-uppercase() {
+    zle vi-cmd-mode
+    zle vi-backward-word
+    zle up-case-word
+    zle vi-add-next
+}
+zle -N viins-uppercase
+
+bindkey "^U" viins-uppercase
+
 bindkey -a "u"  "undo"
 bindkey -a "^R" "redo"
 
 autoload -Uz edit-command-line
 bindkey -a "V" edit-command-line
+
 
 # Emulate the change/delete inside/around symbol operations from vim. Will
 # behave oddly if not used inside a pair of symbols.
