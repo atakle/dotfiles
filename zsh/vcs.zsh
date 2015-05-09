@@ -1,9 +1,5 @@
 autoload -Uz vcs_info
 
-precmd() {
-    vcs_info
-}
-
 # Which version control systems to support.
 zstyle ':vcs_info:*' enable git
 
@@ -21,9 +17,9 @@ zstyle ':vcs_info:*' get-unapplied true
 function +vi-git-countformat() {
     # Display formats for staged, modified and untracked files, respectively.
     # The `0' will be replaced by the corresponding number of files.
-    local prt_git_s=" %{%F{green}+0%f%}"
-    local prt_git_m=" %{%F{yellow}x0%f%}"
-    local prt_git_u=" %{%F{magenta}?0%f%}"
+    local prt_git_s=" %{%F{green}%}+0%{%f%}"
+    local prt_git_m=" %{%F{yellow}%}x0%{%f%}"
+    local prt_git_u=" %{%F{magenta}%}?0%{%f%}"
 
     # Run only if the repository is dirty.
     if [ -n "${hook_com[unstaged]}${hook_com[staged]}" ]; then
@@ -40,7 +36,8 @@ function +vi-git-countformat() {
                  /^.A/   {m+=1}
                  /^.D/   {m+=1}
                  /^.?\?/ {u+=1}
-                 END { print a+0, m+0, u+0 }'))
+                 END { print a+0, m+0, u+0 }')) # Add 0 to prevent empty
+                                                # strings.
         hook_com[unstaged]=""
         test ${changes[1]} != "0" &&
             hook_com[staged]="${prt_git_s/0/${changes[1]}}"

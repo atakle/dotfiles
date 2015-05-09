@@ -3,7 +3,8 @@ setopt prompt_subst
 
 # Allow each host to use a distinct colour.
 if [ -z "$zsh_prompt_colour" ]; then
-    zsh_prompt_colour="green"
+    # Green by default.
+    zsh_prompt_colour="%B%F{green}"
 fi
 
 # Add some additional functionality.
@@ -11,28 +12,76 @@ source "$ZSH_DIR/battery.zsh"
 source "$ZSH_DIR/vcs.zsh"
 source "$ZSH_DIR/vi-mode.zsh"
 
-# Calling vi_mode_prompt_info will print the value of MODE_INDICATOR when in
+# Calling `vi_mode_prompt_info' will print the value of MODE_INDICATOR when in
 # normal mode. Use this to make the prompt character red.
 MODE_INDICATOR="%F{red}"
 
-# Colour of the user@host string. It is red for root and $zsh_prompt_colour for
-# everyone else.
-local prt_colour="%B%(!.%F{red}.%F{$zsh_prompt_colour})"
+# Components that don't need to be updated:
 
-# The user@host string.
-local prt_userhost="%n@%m%b%f"
+local prt_user="%n@%m" # The user@host string.
+local prt_dir="%~"     # Current working directory.
+local prt_char="%#"    # The final character, % for users and # for root.
 
-# Last three components of the working directory, in blue.
-local prt_dir="%B%F{blue}%3~%b%f"
+# Versions of the above with colour added. These are defined separately,
+# because they make it hard to compute the length of the prompt.
+local col_user="%(!.%{%B%F{red}%}.%{$zsh_prompt_colour%})$prt_user%{%b%f%}"
+local col_dir="%{%B%F{blue}%}$prt_dir%{%f%b%}"
+local col_char="%{\$(vi_mode_prompt_info)%}$prt_char%{%b%f%}"
 
-# The final character. It is % for users and # for root. It changes colour in
-# vi normal mode.
-local prt_char="\$(vi_mode_prompt_info)%#%f"
+local prt_jobs="%(1j. {%j}.)" # Number of background jobs, if any.
 
-PROMPT="[$prt_colour$prt_userhost $prt_dir]$prt_char "
+# Expression that matches all non-visible character sequences.
+local zero='%([BSUbfksu]|([FB]|){*})'
 
-local prt_bat="\$(prompt_battery)"  # Battery indicator.
-local prt_jobs="%(1j. {%j}.)"       # Number of background jobs, if any.
-local prt_vcs="\${vcs_info_msg_0_}" # Version control info.
+# The precmd() function is called every time before the prompt appears.
+precmd() {
+    vcs_info # Update VCS information. # This sets the value of
+             # $vcs_info_msg_0_.
+    local col_vcs="${vcs_info_msg_0_}"
 
-RPROMPT="${prt_vcs}${prt_bat}${prt_jobs}"
+    # Update the battery indicator.
+    local col_bat="$(prompt_battery)"
+
+
+    local termwidth=$((COLUMNS - 1))      # Total available space.
+    local threshold=$((0.48 * termwidth)) # Threshold for multilining.
+
+    # Compute the length of the components.
+    local dlen; local llen; local blen; local rlen;
+    dlen=${#:-(${(%)prt_dir})}                    # Path.
+    (( llen = ${#:-[${(%)prt_user} ]# } + dlen )) # Left prompt.
+
+    blen=${#${(S%%)col_bat//$~zero/}}             # Battery
+    vlen=${#${(S%%)col_vcs//$~zero/}}             # Version control.
+    (( rlen = ${#${(%)prt_jobs}} + vlen + blen )) # Right prompt.
+
+    # Check if we can put everything on a single line.
+    if [[ $((llen <= threshold && rlen <= threshold)) -ne 0 ]]; then
+        PROMPT="[$col_user $col_dir]"
+        PROMPT+="$col_char "
+        RPROMPT="$col_vcs$col_bat$prt_jobs"
+        return
+    fi
+
+    # We have a multi-line prompt. The contents of RPROMPT would be placed on
+    # the same line as the last character in PROMPT, so we add its content to
+    # PROMPT instead, after some padding.
+    unset RPROMPT
+
+    # This will be the left part of the second line.
+    local snd_prt="
+[$col_user]$col_char "
+
+
+    if [[ $(((dlen + rlen) < termwidth)) -ne 0 ]]; then
+        # Add the path specifier to the prompt.
+        PROMPT="($col_dir)"
+
+        # Distance between the left and right sides.
+        local pad=$((termwidth - (dlen + rlen)))
+
+        PROMPT+="%{%B%F{black}%}${(l:((pad))::-:):-}%{%b%f%}"
+        PROMPT+="$col_vcs$col_bat$prt_jobs"
+        PROMPT+="$snd_prt"
+    fi
+}
