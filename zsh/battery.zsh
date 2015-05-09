@@ -33,10 +33,10 @@ if whence battery_info > /dev/null; then
          local -a levels
          levels=(80 60 40 20)
          local -a colours
-         colours[80]="%F{green}"
-         colours[60]="%B%F{yellow}"
-         colours[40]="%F{yellow}"
-         colours[20]="%B%F{red}"
+         colours[80]="%{%F{green}%}"
+         colours[60]="%{%B%F{yellow}%}"
+         colours[40]="%{%F{yellow}%}"
+         colours[20]="%{%B%F{red}%}"
 
          local bars
          local colour
@@ -51,6 +51,6 @@ if whence battery_info > /dev/null; then
              fi
          done
 
-         echo " [$colour$bars%b%f] $charge%%"
+         echo " [$colour$bars%{%b%f%}] $charge%%"
     }
 fi
