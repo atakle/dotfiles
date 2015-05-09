@@ -49,11 +49,12 @@ precmd() {
     local col_bat="$(prompt_battery)"
 
 
-    local termwidth=$((COLUMNS - 1))      # Total available space.
-    local threshold=$((0.48 * termwidth)) # Threshold for multilining.
+    local termwidth=$((COLUMNS))          # Total available space.
+    local threshold=$((0.48 * termwidth)) # Threshold for switching to a
+                                          # multi-line prompt.
 
     # Compute the length of the components.
-    local dlen; local llen; local blen; local rlen;
+    local dlen llen blen vlen rlen;
     dlen=${#:-(${(%)prt_dir})}                    # Path.
     (( llen = ${#:-[${(%)prt_user} ]# } + dlen )) # Left prompt.
 
@@ -63,15 +64,14 @@ precmd() {
 
     # Check if we can put everything on a single line.
     if [[ $((llen <= threshold && rlen <= threshold)) -ne 0 ]]; then
-        PROMPT="[$col_user $col_dir]"
-        PROMPT+="$col_char "
+        PROMPT="[$col_user $col_dir]$col_char "
         RPROMPT="$col_vcs$col_bat$prt_jobs"
         return
     fi
 
-    # We have a multi-line prompt. The contents of RPROMPT would be placed on
-    # the same line as the last character in PROMPT, so we add its content to
-    # PROMPT instead, after some padding.
+    # We have a multi-line prompt. The contents of RPROMPT would have been
+    # placed on the same line as the last character in PROMPT, so we add its
+    # contents to PROMPT instead, after some padding.
     unset RPROMPT
 
     # This will be the left part of the second line.
@@ -79,6 +79,8 @@ precmd() {
 [$col_user]$col_char "
 
 
+    # Put PWD and what used to be RPROMPT on the same line as long as it has
+    # space for both.
     if [[ $(((dlen + rlen) < termwidth)) -ne 0 ]]; then
         # Add the path specifier to the prompt.
         PROMPT="($col_dir)"
