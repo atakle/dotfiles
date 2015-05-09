@@ -33,6 +33,12 @@ local prt_jobs="%(1j. {%j}.)" # Number of background jobs, if any.
 # Expression that matches all non-visible character sequences.
 local zero='%([BSUbfksu]|([FB]|){*})'
 
+# Prevent $prt_jobs from going blank when a child process ends, while still
+# taking up space.
+TRAPCHLD() {
+    [[ -o notify ]] && zle && { zle reset-prompt; zle -R }
+}
+
 # The precmd() function is called every time before the prompt appears.
 precmd() {
     vcs_info # Update VCS information. # This sets the value of
