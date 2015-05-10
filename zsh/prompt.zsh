@@ -30,6 +30,9 @@ local col_char="%{\$(vi_mode_prompt_info)%}$prt_char%{%b%f%}"
 
 local prt_jobs="%(1j. {%j}.)" # Number of background jobs, if any.
 
+# Return status of the last command in red, if it was nonzero.
+local col_ret="%(0?..(%{%F{red}%}%?%{%f%}%) )"
+
 # Expression that matches all non-visible character sequences.
 local zero='%([BSUbfksu]|([FB]|){*})'
 
@@ -64,7 +67,7 @@ precmd() {
 
     # Check if we can put everything on a single line.
     if [[ $((llen <= threshold && rlen <= threshold)) -ne 0 ]]; then
-        PROMPT="[$col_user $col_dir]$col_char "
+        PROMPT="${col_ret}[$col_user $col_dir]$col_char "
         RPROMPT="$col_vcs$col_bat$prt_jobs"
         return
     fi
@@ -76,7 +79,7 @@ precmd() {
 
     # This will be the left part of the second line.
     local snd_prt="
-[$col_user]$col_char "
+${col_ret}[$col_user]$col_char "
 
 
     # Put PWD and what used to be RPROMPT on the same line as long as it has
