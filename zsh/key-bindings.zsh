@@ -22,6 +22,9 @@ bindkey "^U" viins-uppercase
 bindkey -a "u"  "undo"
 bindkey -a "^R" "redo"
 
+bindkey -a "^P" up-history
+bindkey -a "^N" down-history
+
 autoload -Uz edit-command-line
 bindkey -a "V" edit-command-line
 
