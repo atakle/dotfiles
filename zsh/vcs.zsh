@@ -15,16 +15,18 @@ zstyle ':vcs_info:*' get-unapplied true
 # Modify the %c and %u strings to display the number of staged changes,
 # unstaged changes and untracked files.
 function +vi-git-countformat() {
-    # Display formats for staged, modified and untracked files, respectively.
-    # The `0' will be replaced by the corresponding number of files.
+    # Display formats for staged, modified, conflicted and untracked files,
+    # respectively. The `0' will be replaced by the corresponding number of
+    # files.
     local prt_git_s=" %{%F{green}%}+0%{%f%}"
     local prt_git_m=" %{%F{yellow}%}x0%{%f%}"
+    local prt_git_c=" %{%B%F{red}%}!0%{%b%f%}"
     local prt_git_u=" %{%F{magenta}%}?0%{%f%}"
 
     local -a changes
-    # Parse the git status output and assign to `changes' an array of three
-    # elements, containing the number of staged, modified, and untracked
-    # files, respectively.
+    # Parse the git status output and assign to `changes' an array of four
+    # elements, containing the number of staged, modified, conflicted, and
+    # untracked files, respectively.
     changes=($(
         git status -s --porcelain |
         awk '/^A/    {a+=1}
@@ -33,16 +35,20 @@ function +vi-git-countformat() {
              /^.M/   {m+=1}
              /^.A/   {m+=1}
              /^.D/   {m+=1}
+             /^U./   {c+=1}
+             /^.U/   {c+=1}
              /^.?\?/ {u+=1}
-             END { print a+0, m+0, u+0 }')) # Add 0 to prevent empty
-                                            # strings.
+             END { print a+0, m+0, c+0, u+0 }')) # Add 0 to prevent empty
+                                                 # strings.
     hook_com[unstaged]=""
     test ${changes[1]} != "0" &&
         hook_com[staged]="${prt_git_s/0/${changes[1]}}"
     test ${changes[2]} != "0" &&
         hook_com[unstaged]+="${prt_git_m/0/${changes[2]}}"
     test ${changes[3]} != "0" &&
-        hook_com[unstaged]+="${prt_git_u/0/${changes[3]}}"
+        hook_com[unstaged]+="${prt_git_c/0/${changes[3]}}"
+    test ${changes[4]} != "0" &&
+        hook_com[unstaged]+="${prt_git_u/0/${changes[4]}}"
 
     if [ -z "${hook_com[unstaged]}${hook_com[staged]}" ]; then
         # exploit the `staged' variable to indicate a clean repository.
