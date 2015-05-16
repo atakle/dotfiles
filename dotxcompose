@@ -1,0 +1,25 @@
+include "%H/.config/dotfiles/xcompose/dotXCompose"
+
+# Box drawing characters. Their direction is based on the vi keys, A capital
+# letter indicates a full-length line, while a small letter indicates a
+# half-length line.
+<Multi_key> <numbersign> <H> <H> : "─" U2500 # box drawings light horizontal
+<Multi_key> <numbersign> <L> <L> : "─" U2500 # box drawings light horizontal
+<Multi_key> <numbersign> <J> <J> : "│" U2502 # box drawings light vertical
+<Multi_key> <numbersign> <K> <K> : "│" U2502 # box drawings light vertical
+<Multi_key> <numbersign> <j> <l> : "┌" U250C # box drawings light down and right
+<Multi_key> <numbersign> <j> <h> : "┐" U2510 # box drawings light down and left
+<Multi_key> <numbersign> <k> <l> : "└" U2514 # box drawings light up and right
+<Multi_key> <numbersign> <k> <h> : "┘" U2518 # box drawings light up and left
+<Multi_key> <numbersign> <J> <l> : "├" U251C # box drawings light vertical and right
+<Multi_key> <numbersign> <K> <l> : "├" U251C # box drawings light vertical and right
+<Multi_key> <numbersign> <J> <h> : "┤" U2524 # box drawings light vertical and left
+<Multi_key> <numbersign> <K> <h> : "┤" U2524 # box drawings light vertical and left
+<Multi_key> <numbersign> <j> <H> : "┬" U252C # box drawings light down and horizontal
+<Multi_key> <numbersign> <j> <L> : "┬" U252C # box drawings light down and horizontal
+<Multi_key> <numbersign> <k> <H> : "┴" U2534 # box drawings light up and horizontal
+<Multi_key> <numbersign> <k> <L> : "┴" U2534 # box drawings light up and horizontal
+<Multi_key> <numbersign> <J> <H> : "┼" U253C # box drawings light vertical and horizontal
+<Multi_key> <numbersign> <J> <L> : "┼" U253C # box drawings light vertical and horizontal
+<Multi_key> <numbersign> <K> <H> : "┼" U253C # box drawings light vertical and horizontal
+<Multi_key> <numbersign> <K> <L> : "┼" U253C # box drawings light vertical and horizontal
