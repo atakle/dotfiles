@@ -12,8 +12,11 @@ if whence -p pacman > /dev/null; then
     alias pss='pacman -Ss'
 fi
 
-alias la="ls -A"
-alias find="noglob find"
+alias ls='ls --color=auto'
+alias l='ls -lA'
+alias ll='ls -l'
+alias la='ls -A'
 
-# vimdiff with root privileges
-alias sudodiff="env EDITOR=vimdiff sudo -e"
+alias po='popd'
+
+alias find='noglob find'

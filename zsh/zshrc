@@ -1,24 +1,45 @@
-# Paths to the oh-my-zsh configuration
-ZSH=$HOME/.zsh/oh-my-zsh
-ZSH_CUSTOM=$HOME/.zsh
-
-ZSH_THEME="theme"
-
-plugins=(battery screen vi-mode)
-
-# Load local settings, if they are present
-if [[ -f $ZSH_CUSTOM/local.zsh ]]; then
-    source $ZSH_CUSTOM/local.zsh
+# Use screen if it's available and we're not already using it.
+if whence -p screen > /dev/null; then
+    if [ -n "$STY" ]; then
+        # Screen is running, but we need to check for some specical cases,
+        # e.g., a terminal emulator running inside a window system running
+        # inside a screen session doesn't count.
+        if [ "x${$(ps --no-headers -o cmd -p $PPID):#screen*:i}" = "x" ]; then
+            # The direct parent process is screen, so we're definitely in a
+            # screen session.
+            true
+        elif [ "x${TERM:#screen*}" != "x" ]; then
+            # We assume that screen sets the TERM variable in all of its
+            # subshells. So if this is not the case, we start a new session.
+            exec screen -m
+        fi
+    else
+        exec screen -RR
+    fi
 fi
 
-# No automatic oh-my-zsh updates
-DISABLE_AUTO_UPDATE=true
+# Set the zsh directory.
+if [ -z "$ZSH_DIR" ]; then
+    ZSH_DIR="$HOME/.zsh"
+fi
 
-CASE_SENSITIVE=true
+# Which configuration files to read
+local -a conf_files
+conf_files=( env
+             completion
+             functions
+             directories
+             aliases
+             history
+             key-bindings
+             prompt )
 
-source $ZSH/oh-my-zsh.sh
+# Source the configuration files.
+for f in "${conf_files[@]}"; do
+    source "$ZSH_DIR/$f.zsh"
+done
 
-# Use screen if it's available and we're not already using it.
-if [[ -z "$STY" && "$TERM" != "screen-bce" && -x $(which screen) ]]; then
-    exec screen -RR
+# Load local settings, if they are present
+if [ -f $ZSH_DIR/local.zsh ]; then
+    source $ZSH_DIR/local.zsh
 fi

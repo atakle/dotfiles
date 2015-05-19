@@ -3,13 +3,49 @@ bindkey -v
 # More time to type composite commands
 export KEYTIMEOUT=100
 
-bindkey "jk" "vi-cmd-mode"
-bindkey "[1~" "beginning-of-line" # HOME
-bindkey "[4~" "end-of-line"       # END
+# Some extra functionality
+autoload -Uz edit-command-line
+autoload -Uz modify-current-argument
+
+bindkey "jk"    vi-cmd-mode
+bindkey "[1~" beginning-of-line    # HOME
+bindkey "[4~" end-of-line          # END
+bindkey "^H"    backward-delete-char # BACKSPACE
+
+# Upper-case the word to the left of the cursor.
+function viins-uppercase() {
+    zle vi-cmd-mode
+    zle vi-backward-word
+    zle up-case-word
+    zle vi-add-next
+}
+zle -N viins-uppercase
+
+bindkey "^U" viins-uppercase
 
 bindkey -a "u"  "undo"
 bindkey -a "^R" "redo"
-bindkey -a "V" "edit-command-line"
+
+bindkey "^P" history-beginning-search-backward
+bindkey "^N" history-beginning-search-forward
+
+bindkey -a "V" edit-command-line
+
+
+# Upper-case the argument under the cursor
+function vicmd-upcase() {
+    modify-current-argument '${ARG:u}'
+}
+zle -N vicmd-upcase
+bindkey -a "gU" vicmd-upcase
+
+# Lower-case the argument under the cursor
+function vicmd-lowcase() {
+    modify-current-argument '${ARG:l}'
+}
+zle -N vicmd-lowcase
+bindkey -a "gu" vicmd-lowcase
+
 
 # Emulate the change/delete inside/around symbol operations from vim. Will
 # behave oddly if not used inside a pair of symbols.
