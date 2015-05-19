@@ -53,4 +53,7 @@ if whence battery_info > /dev/null; then
 
          echo " [$colour$bars%{%b%f%}] $charge%%"
     }
+else
+    # Define a no-op function if no batteries are found.
+    function prompt_battery() {}
 fi
