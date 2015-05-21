@@ -6,7 +6,7 @@ whence -p colordiff > /dev/null && \
     alias diff='colordiff'
 
 # Coloured pacman output, and some shortcuts
-if [ -x /usr/bin/pacman ]; then
+if whence -p pacman > /dev/null; then
     alias pacman='pacman --color auto'
     alias syu='sudo pacman -Syu'
     alias pss='pacman -Ss'
