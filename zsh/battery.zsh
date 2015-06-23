@@ -12,6 +12,7 @@ fi
 if whence battery_info > /dev/null; then
 
     function prompt_battery() {
+
         # Get the current battery status.
         battery_info | read state charge
 
@@ -20,40 +21,29 @@ if whence battery_info > /dev/null; then
             return
         fi
 
-        # The character to fill the battery with.
-        local c
-        case $state in
-            +) c='<'  ;; # Discharging.
-            -) c='>'  ;; # Charging.
-            *) return ;; # Something else. In this case, don't show the battery
-                         # in the prompt.
-         esac
+        # Charging indicator
+        local ch
+        if [[ "$state" == "+" ]]
+        then
+            ch="%{%B%F{yellow}%}⚡%{%b%f%}"
+        else
+            ch=""
+        fi
 
-         # Charge levels and their corresponding colours.
-         local -a levels
-         levels=(80 60 40 20)
-         local -a colours
-         colours[80]="%{%F{green}%}"
-         colours[60]="%{%B%F{yellow}%}"
-         colours[40]="%{%F{yellow}%}"
-         colours[20]="%{%B%F{red}%}"
+        # Text colour
+        local col
+        if [[ "$charge" -ge "67" ]]; then
+            col="%F{green}"
+        elif [[ "$charge" -ge "33" ]]; then
+            col="%B%F{yellow}"
+        else
+            col="%F{red}"
+        fi
 
-         local bars
-         local colour
-         for i in "${levels[@]}"; do
-             if [ "$charge" -ge "$i" ]; then
-                 if [ -z "$colour" ]; then
-                     colour="${colours[$i]}"
-                 fi
-                 bars+="$c"
-             else
-                 bars+=" "
-             fi
-         done
-
-         echo " [$colour$bars%{%b%f%}] $charge%%"
+        echo " [%{$col%}$charge%%%{%b%s%}]$ch"
     }
+
 else
-    # Define a no-op function if no batteries are found.
+    # Define a no-op function if no battery information is available.
     function prompt_battery() {}
 fi
