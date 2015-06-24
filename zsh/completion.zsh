@@ -11,7 +11,6 @@ zstyle ':completion:*' completer                                      \
 
 # The matches to try with the _match completer.
 zstyle ':completion:*' matcher-list \
-     'r:|[._-]=** r:|=**'           \
      'l:|=*       r:|=*'            \
      'm:{[:lower:]}={[:upper:]}'    \
     '+m:{[:lower:][:upper:]}={[:upper:][:lower:]}'
