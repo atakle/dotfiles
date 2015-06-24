@@ -32,10 +32,16 @@ if whence battery_info > /dev/null; then
 
         # Text colour
         local col
-        if [[ "$charge" -ge "67" ]]; then
+        if   [[ "$charge" -ge "84" ]]; then
+            col="%B%F{green}"
+        elif [[ "$charge" -ge "67" ]]; then
             col="%F{green}"
-        elif [[ "$charge" -ge "33" ]]; then
+        elif [[ "$charge" -ge "51" ]]; then
             col="%B%F{yellow}"
+        elif [[ "$charge" -ge "34" ]]; then
+            col="%F{yellow}"
+        elif [[ "$charge" -ge "17" ]]; then
+            col="%B%F{red}"
         else
             col="%F{red}"
         fi
