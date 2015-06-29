@@ -25,8 +25,7 @@ if whence battery_info > /dev/null; then
         local ch
         case $state in
             +) ch="%{%B%F{yellow}%}⚡%{%b%f%}" ;;
-            -) ch=""                          ;;
-            0) ch=""                          ;;
+            -) ch="%{%F{red}%}-%{%b%f%}"      ;;
             *) return                         ;;
         esac
 
