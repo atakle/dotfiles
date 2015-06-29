@@ -5,7 +5,7 @@ if whence -p acpi > /dev/null; then
         acpi -b | awk '/^Battery/ {print $3, $4; exit}' |
         sed -e 's_Charging,_+_'    -e 's_Full,_1_'    \
             -e 's_Discharging,_-_' -e 's_Unknown,_0_' \
-            -e 's_%,__'
+            -e 's_%,\?__'
     }
 fi
 
