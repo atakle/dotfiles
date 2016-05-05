@@ -5,6 +5,6 @@ lesskey              .lesskey
 screenrc             .screenrc
 vim                  .vim
 vim/vimrc            .vimrc
-dotxcompose          .XCompose
+xcompose/dotXCompose .XCompose
 zsh                  .zsh
 zsh/zshrc            .zshrc
