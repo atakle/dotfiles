@@ -33,6 +33,9 @@ set lazyredraw     " don't redraw the screen while running macros
 " Wait for two seconds for multi-key commands
 set timeoutlen=2000
 
+" Don't overwrite the system clipboard when using visual mode
+set clipboard-=autoselect
+
 " What to keep in the viminfo file:
 "   marks for 100 files
 "   registers up to 1000 lines
