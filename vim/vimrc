@@ -78,7 +78,9 @@ command! Rootwrite w !sudo tee % > /dev/null
 if has("autocmd")
 
     " Enable dirsettings
-    call dirsettings#Install()
+    if exists("*dirsettings#Install")
+        call dirsettings#Install()
+    endif
 
     " Enable Pathogen if it is available
     runtime bundle/pathogen/autoload/pathogen.vim
