@@ -4,7 +4,7 @@
 augroup surroundComment
     " TODO: Read the comment characters from &comments instead of hard-coding
     "       them.
-    augroup! surroundComment
+    autocmd!
     autocmd FileType c       let b:surround_99 = "/* \r */"
     autocmd FileType cpp     let b:surround_99 = "/* \r */"
     autocmd FileType haskell let b:surround_99 = "{- \r -}"
