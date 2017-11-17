@@ -45,7 +45,7 @@ if whence battery_info > /dev/null; then
             col="%F{red}"
         fi
 
-        echo " [%{$col%}$charge%%%{%b%s%}]$ch"
+        echo " [%{$col%}$charge%%%{%b%f%}]$ch"
     }
 
 else
