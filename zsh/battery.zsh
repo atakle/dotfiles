@@ -24,9 +24,9 @@ if whence battery_info > /dev/null; then
         # Charging indicator
         local ch
         case $state in
-            +) ch="%{%B%F{yellow}%}⚡%{%b%f%}" ;;
-            -) ch="%{%F{red}%}-%{%b%f%}"      ;;
-            *) return                         ;;
+            +) ch="%{%F{green}%}+%{%b%f%}" ;;
+            -) ch="%{%F{red}%}-%{%b%f%}"   ;;
+            *) return                      ;;
         esac
 
         # Text colour
