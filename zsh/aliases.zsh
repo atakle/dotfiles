@@ -20,3 +20,4 @@ alias la='ls -A'
 alias po='popd'
 
 alias find='noglob find'
+alias git='noglob git'
