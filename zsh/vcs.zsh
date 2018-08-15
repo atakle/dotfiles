@@ -37,8 +37,7 @@ function +vi-git-countformat() {
              /^.M/         {m++}
              /^.A/         {m++}
              /^.D/         {m++}
-             /^U./         {c++}
-             /^.U/         {c++}
+             /^(U.|.U)/    {c++}
              /^.?\?/       {u++}
              # Add 0 to make nonempty and coerce to numbers.
              END { print s+0, m+0, c+0, u+0, a+0, b+0}'))
