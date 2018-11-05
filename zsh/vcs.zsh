@@ -33,7 +33,8 @@ function +vi-git-countformat() {
              /^##.*,/      {a=$4; b=$6}  # s: staged files
              /^A/          {s++}         # m: modifications
              /^M/          {s++}         # c: conflicts
-             /^D/          {s++}         # u: untracked files
+             /^R/          {s++}         # u: untracked files
+             /^D/          {s++}
              /^.M/         {m++}
              /^.A/         {m++}
              /^.D/         {m++}
