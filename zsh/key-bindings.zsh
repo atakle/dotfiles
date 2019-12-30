@@ -11,6 +11,7 @@ bindkey "jk"    vi-cmd-mode
 bindkey "[1~" beginning-of-line    # HOME
 bindkey "[4~" end-of-line          # END
 bindkey "^H"    backward-delete-char # BACKSPACE
+bindkey "[3~" delete-char          # DELETE
 
 # Upper-case the word to the left of the cursor.
 function viins-uppercase() {
