@@ -21,3 +21,7 @@ alias po='popd'
 
 alias find='noglob find'
 alias git='noglob git'
+
+# This happens way too often
+alias gti=git
+compdef _git gti=git
