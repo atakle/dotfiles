@@ -23,10 +23,6 @@ if [ -z "$ZSH_DIR" ]; then
     ZSH_DIR="$HOME/.zsh"
 fi
 
-# Load local settings, if they are present
-if [ -f $ZSH_DIR/local.zsh ]; then
-    source $ZSH_DIR/local.zsh
-fi
 # Which configuration files to read
 
 local -a conf_files
@@ -43,3 +39,8 @@ conf_files=( env
 for f in "${conf_files[@]}"; do
     source "$ZSH_DIR/$f.zsh"
 done
+
+# Load local settings, if they are present
+if [ -f $ZSH_DIR/local.zsh ]; then
+    source $ZSH_DIR/local.zsh
+fi
