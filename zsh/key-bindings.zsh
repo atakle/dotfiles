@@ -32,6 +32,7 @@ bindkey "^N" history-beginning-search-forward
 
 bindkey -a "V" edit-command-line
 
+bindkey -a "[3~" vi-delete-char
 
 # Upper-case the argument under the cursor
 function vicmd-upcase() {
