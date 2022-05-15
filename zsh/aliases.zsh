@@ -12,6 +12,9 @@ if whence -p pacman > /dev/null; then
     alias pss='pacman -Ss'
 fi
 
+# Remove the `screen.' prefix from TERM when using ssh
+alias ssh='TERM=${TERM#screen.} ssh'
+
 alias ls='ls --color=auto'
 alias l='ls -lA'
 alias ll='ls -l'
