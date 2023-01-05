@@ -11,11 +11,3 @@ if [ -d "$HOME/bin" ]; then
         *) PATH="$HOME/bin:$PATH"
     esac
 fi
-
-# Do the same with MANPATH.
-if [ -d "$HOME/share/man" ]; then
-    case :$MANPATH: in
-        *:$HOME/share/man:*) ;; # Already present
-        *) MANPATH="$HOME/share/man:$MANPATH"
-    esac
-fi
