@@ -78,3 +78,6 @@ bindkey -as "diw" "lbde"
 bindkey -as "daw" "lbdex"
 bindkey -as "diW" "lBdE"
 bindkey -as "daW" "lBdEx"
+
+# Disable flow control (^S/^Q)
+stty -ixon
