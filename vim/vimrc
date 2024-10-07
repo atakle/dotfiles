@@ -77,18 +77,6 @@ command! Rootwrite w !sudo tee % > /dev/null
 
 if has("autocmd")
 
-    " Enable dirsettings
-    if exists("*dirsettings#Install")
-        call dirsettings#Install()
-    endif
-
-    " Enable Pathogen if it is available
-    runtime bundle/pathogen/autoload/pathogen.vim
-    if exists("*pathogen#infect")
-        call pathogen#infect()
-        Helptags
-    endif
-
     " Enable file type detection and language-dependent indenting.
     filetype plugin indent on
 
