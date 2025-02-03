@@ -53,8 +53,8 @@ precmd() {
 
 
     local termwidth=$((COLUMNS))          # Total available space.
-    local threshold=$((0.48 * termwidth)) # Threshold for switching to a
-                                          # multi-line prompt.
+    local threshold=$((0.8 * termwidth)) # Threshold for switching to a
+                                         # multi-line prompt.
 
     # Compute the length of the components.
     local dlen llen blen vlen rlen;
@@ -66,7 +66,7 @@ precmd() {
     (( rlen = ${#${(%)prt_jobs}} + vlen + blen )) # Right prompt.
 
     # Check if we can put everything on a single line.
-    if [[ $((llen <= threshold && rlen <= threshold)) -ne 0 ]]; then
+    if [[ $((llen + rlen <= threshold)) -ne 0 ]]; then
         PROMPT="${col_ret}[$col_user $col_dir]$col_char "
         RPROMPT="$col_vcs$col_bat$prt_jobs"
         return
