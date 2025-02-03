@@ -51,6 +51,10 @@ precmd() {
     # Update the battery indicator.
     local col_bat="$(prompt_battery)"
 
+    # Python virtualenv
+    local prt_venv="$(echo "$VIRTUAL_ENV" \
+      | xargs -r basename \
+      | xargs -r printf " (%s)")"
 
     local termwidth=$((COLUMNS))          # Total available space.
     local threshold=$((0.8 * termwidth)) # Threshold for switching to a
@@ -58,8 +62,10 @@ precmd() {
 
     # Compute the length of the components.
     local dlen llen blen vlen rlen;
-    dlen=${#:-(${(%)prt_dir})}                    # Path.
-    (( llen = ${#:-[${(%)prt_user} ]# } + dlen )) # Left prompt.
+    # Length of the path.
+    dlen=${#:-(${(%)prt_dir})}
+    # Total length of the left prompt
+    (( llen = ${#:-[${(%)prt_user} ]# } + ${#prt_venv} + dlen ))
 
     blen=${#${(S%%)col_bat//$~zero/}}             # Battery
     vlen=${#${(S%%)col_vcs//$~zero/}}             # Version control.
@@ -67,7 +73,7 @@ precmd() {
 
     # Check if we can put everything on a single line.
     if [[ $((llen + rlen <= threshold)) -ne 0 ]]; then
-        PROMPT="${col_ret}[$col_user $col_dir]$col_char "
+        PROMPT="${col_ret}[$col_user $col_dir]${prt_venv}$col_char "
         RPROMPT="$col_vcs$col_bat$prt_jobs"
         return
     fi
@@ -79,7 +85,7 @@ precmd() {
 
     # This will be the left part of the second line.
     local snd_prt="
-${col_ret}[$col_user]$col_char "
+${col_ret}[$col_user]${prt_venv}$col_char "
 
 
     # Put PWD and what used to be RPROMPT on the same line as long as it has
