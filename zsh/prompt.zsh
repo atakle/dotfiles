@@ -52,11 +52,6 @@ _left_prompt() {
 
 # Construct the right part of the prompt.
 _right_prompt() {
-    # Basename (tail) of the Python virtualenv directory:
-    local python_virtualenv_txt="(\${VIRTUAL_ENV:t})"
-    # Or an empty string if no virtualenv is in use:
-    local python_virtualenv="\${VIRTUAL_ENV:+$python_virtualenv_txt}"
-
     # Version control information is read from the 'vcs_info_msg_0_' variable.
     # The display format is defined in 'vcs.zsh'.
     local version_control="\${vcs_info_msg_0_}"
@@ -69,7 +64,7 @@ _right_prompt() {
     # Display only if at least one:
     background_jobs="%(1j|$background_jobs_txt|)"
 
-    echo "${python_virtualenv}${version_control}${battery}${background_jobs}"
+    echo "${version_control}${battery}${background_jobs}"
 }
 
 PROMPT="$(_left_prompt)"
