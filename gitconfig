@@ -1,11 +1,49 @@
-[color]
-	ui = auto
-[core]
-	editor = vim
-[format]
-	suffix = .txt
 [user]
 	name  = Anne Takle
 	email = anne@takle.priv.no
+
+[core]
+	editor = vim
+
+[column]
+	ui = auto
+
+[branch]
+	sort = -commiterdate
+
+[tag]
+	sort = version:refname
+
+[diff]
+	algorithm = histogram
+	colorMoved = plain
+	mnemonicPrefix = true
+	renames = true
+
 [push]
 	default = simple
+	followTags = true
+
+[fetch]
+	all = true
+	prune = true
+	pruneTags = true
+
+[commit]
+	verbose = true
+
+[rerere]
+	enabled = true
+
+[merge]
+	conflictstyle = zdiff3
+
+[rebase]
+	autoSquash = true
+	updateRefs = true
+
+[init]
+	defaultbranch = main
+
+[help]
+	autocorrect = prompt
