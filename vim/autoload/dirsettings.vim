@@ -1,1 +1,0 @@
-../bundle/dirsettings/autoload/dirsettings.vim
