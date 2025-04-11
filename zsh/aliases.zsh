@@ -30,3 +30,5 @@ alias rm='rm -I'
 # This happens way too often
 alias gti=git
 compdef _git gti=git
+
+alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'

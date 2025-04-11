@@ -1,5 +1,10 @@
 # Use screen if it's available and we're not already using it.
 if whence -p screen > /dev/null; then
+
+    # Temporary variable wrangling
+    export SCREENDIR="$XDG_RUNTIME_DIR/screen"
+    export SCREENRC="$HOME/.config/screenrc"
+
     if [ -n "$STY" ]; then
         # Screen is running, but we need to check for some specical cases,
         # e.g., a terminal emulator running inside a window system running
