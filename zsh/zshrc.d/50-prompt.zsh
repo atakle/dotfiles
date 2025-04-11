@@ -1,11 +1,6 @@
 # Enable parameter and command expansion in prompts.
 setopt prompt_subst
 
-# Add some additional functionality.
-source "$ZDOTDIR/battery.zsh"
-source "$ZDOTDIR/vcs.zsh"
-source "$ZDOTDIR/vi-mode.zsh"
-
 # Calling `vi_mode_prompt_info' will print the value of MODE_INDICATOR when in
 # normal mode. This is used to make the shell state character red.
 MODE_INDICATOR="%F{red}"
