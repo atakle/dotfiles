@@ -28,7 +28,7 @@ zstyle ':completion:*' menu select=long
 
 # Start the completion system.
 autoload -U compinit
-compinit -d "$ZSH_DIR/zcompdump"
+compinit -d "$ZDOTDIR/zcompdump"
 
 autoload -U bashcompinit
 bashcompinit

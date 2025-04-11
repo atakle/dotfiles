@@ -1,9 +1,11 @@
+if [[ -z "$ZDOTDIR" ]]; then
+    echo "ZDOTDIR is not defined. Skipping rc scripts" 1>&2
+    return 1
+fi
+
+
 # Use screen if it's available and we're not already using it.
 if whence -p screen > /dev/null; then
-
-    # Temporary variable wrangling
-    export SCREENDIR="$XDG_RUNTIME_DIR/screen"
-    export SCREENRC="$HOME/.config/screenrc"
 
     if [ -n "$STY" ]; then
         # Screen is running, but we need to check for some specical cases,
@@ -23,16 +25,10 @@ if whence -p screen > /dev/null; then
     fi
 fi
 
-# Set the zsh directory.
-if [ -z "$ZSH_DIR" ]; then
-    ZSH_DIR="$HOME/.zsh"
-fi
-
 # Which configuration files to read
 
 local -a conf_files
-conf_files=( env
-             completion
+conf_files=( completion
              functions
              directories
              aliases
@@ -42,10 +38,10 @@ conf_files=( env
 
 # Source the configuration files.
 for f in "${conf_files[@]}"; do
-    source "$ZSH_DIR/$f.zsh"
+    source "$ZDOTDIR/$f.zsh"
 done
 
 # Load local settings, if they are present
-if [ -f $ZSH_DIR/local.zsh ]; then
-    source $ZSH_DIR/local.zsh
+if [ -f "$ZDOTDIR/local.zsh" ]; then
+    source "$ZDOTDIR/local.zsh"
 fi

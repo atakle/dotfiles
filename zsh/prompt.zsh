@@ -2,9 +2,9 @@
 setopt prompt_subst
 
 # Add some additional functionality.
-source "$ZSH_DIR/battery.zsh"
-source "$ZSH_DIR/vcs.zsh"
-source "$ZSH_DIR/vi-mode.zsh"
+source "$ZDOTDIR/battery.zsh"
+source "$ZDOTDIR/vcs.zsh"
+source "$ZDOTDIR/vi-mode.zsh"
 
 # Calling `vi_mode_prompt_info' will print the value of MODE_INDICATOR when in
 # normal mode. This is used to make the shell state character red.

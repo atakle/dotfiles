@@ -1,5 +1,5 @@
 if [ -z "$HISTFILE" ]; then
-    HISTFILE=$ZSH_DIR/zsh_history
+    HISTFILE=$ZDOTDIR/zsh_history
 fi
 
 HISTSIZE=50000 # Maximum history size.
