@@ -1,6 +1,7 @@
-# Use screen if it's available and we're not already using it.
 if whence -p screen > /dev/null; then
 
+    # Start a screen session, if screen is available, and we're not already
+    # using it.
     if [ -n "$STY" ]; then
         # Screen is running, but we need to check for some specical cases,
         # e.g., a terminal emulator running inside a window system running
@@ -17,4 +18,11 @@ if whence -p screen > /dev/null; then
     else
         exec screen -RR
     fi
+
+
+    # Command for creating a new screen window with $PWD as the working
+    # directory.
+    function ds {
+        screen zsh -c "cd \"$PWD\" && exec $SHELL --login"
+    }
 fi
