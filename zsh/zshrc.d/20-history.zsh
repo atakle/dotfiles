@@ -1,6 +1,4 @@
-if [ -z "$HISTFILE" ]; then
-    HISTFILE=$ZDOTDIR/zsh_history
-fi
+HISTFILE="${XDG_STATE_HOME:-$HOME/.local/state}/zsh_history"
 
 HISTSIZE=50000 # Maximum history size.
 SAVEHIST=10000 # Maximun number of entries to add from a single session.

@@ -28,7 +28,7 @@ zstyle ':completion:*' menu select=long
 
 # Start the completion system.
 autoload -U compinit
-compinit -d "$ZDOTDIR/zcompdump"
+compinit -d "${XDG_CACHE_HOME:-$HOME/.cache}/zcompdump"
 
 autoload -U bashcompinit
 bashcompinit
