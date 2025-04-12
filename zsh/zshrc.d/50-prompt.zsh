@@ -55,9 +55,9 @@ _right_prompt() {
     local battery="\$(prompt_battery)"
 
     # Number of background jobs
-    background_jobs_txt=" {%j}"
+    local background_jobs_txt=" {%j}"
     # Display only if at least one:
-    background_jobs="%(1j|$background_jobs_txt|)"
+    local background_jobs="%(1j|$background_jobs_txt|)"
 
     echo "${version_control}${battery}${background_jobs}"
 }
@@ -71,10 +71,4 @@ unfunction _left_prompt _right_prompt
 # Update version control info before rendering the prompt.
 precmd() {
     vcs_info
-}
-
-# Prevent the display of child processes from going blank when a child process
-# ends, while still taking up space.
-TRAPCHLD() {
-    [[ -o notify ]] && zle && { zle reset-prompt; zle -R }
 }
