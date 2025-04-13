@@ -15,6 +15,17 @@ zstyle ':vcs_info:*' get-unapplied true
 # Modify the %c and %u strings to display the number of staged changes,
 # unstaged changes and untracked files.
 function +vi-git-countformat() {
+    # Special handling of the .git directory and bare respositories.
+    if [[ "$(git rev-parse --is-inside-work-tree)" = "false" ]]; then
+        hook_com[staged]=" "
+        hook_com[unstaged]=".git"
+        if [[ "$(git rev-parse --is-bare-repository)" = "true" ]]; then
+            hook_com[unstaged]="bare"
+        fi
+
+        return
+    fi
+
     # Display formats for the git status. The `0' will be replaced by the
     # corresponding number of files or commits.
     local prt_git_s=" %{%F{green}%}+0%{%f%}"   # Staged files.
