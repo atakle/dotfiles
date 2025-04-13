@@ -6,74 +6,61 @@ zstyle ':vcs_info:*' enable git
 # Check for changed files. Might be slow for large repos.
 zstyle ':vcs_info:*' check-for-changes true
 
-zstyle ':vcs_info:*' formats       '(%b%c%u)'
-zstyle ':vcs_info:*' actionformats '(%b%c%u %a)'
+zstyle ':vcs_info:*' formats       '(%b%m)'
+zstyle ':vcs_info:*' actionformats '(%b%m %a)'
 
 # Get list of unapplied patches.
 zstyle ':vcs_info:*' get-unapplied true
 
-# Modify the %c and %u strings to display the number of staged changes,
-# unstaged changes and untracked files.
+# Populate the %m (misc) part of the prompt with custom information.
 function +vi-git-countformat() {
-    # Special handling of the .git directory and bare respositories.
+    # Check if we're in a bare repository, or inside the .git directory, since
+    # Calling 'git status' only works from inside a work tree.
     if [[ "$(git rev-parse --is-inside-work-tree)" = "false" ]]; then
-        hook_com[staged]=" "
-        hook_com[unstaged]=".git"
         if [[ "$(git rev-parse --is-bare-repository)" = "true" ]]; then
-            hook_com[unstaged]="bare"
+            hook_com[misc]=" bare"
+        else
+            hook_com[misc]=" .git"
         fi
-
         return
     fi
 
-    # Display formats for the git status. The `0' will be replaced by the
-    # corresponding number of files or commits.
-    local prt_git_s=" %{%F{green}%}+0%{%f%}"   # Staged files.
-    local prt_git_m=" %{%F{yellow}%}x0%{%f%}"  # Unstaged modifications.
-    local prt_git_c=" %{%B%F{red}%}!0%{%b%f%}" # Files with conflicts.
-    local prt_git_u=" %{%F{magenta}%}?0%{%f%}" # Untracked files.
-    local prt_git_a=" %{%F{green}%}→0%{%f%}"   # Commits ahead of origin.
-    local prt_git_b=" %{%F{red}%}←0%{%f%}"     # Commits behind origin.
-
     local -a changes
-    # Parse the git status output and assign the result to `changes'.
-    changes=($(
-        git status -bs --porcelain |
-        awk '/^##.*ahead/  {a=$4}        # a: commits ahead
-             /^##.*behind/ {b=$4}        # b: commits behind
-             /^##.*,/      {a=$4; b=$6}  # s: staged files
-             /^A/          {s++}         # m: modifications
-             /^M/          {s++}         # c: conflicts
-             /^R/          {s++}         # u: untracked files
-             /^D/          {s++}
-             /^.M/         {m++}
-             /^.A/         {m++}
-             /^.D/         {m++}
-             /^(U.|.U)/    {c++}
-             /^.?\?/       {u++}
-             # Add 0 to make nonempty and coerce to numbers.
-             END { print s+0, m+0, c+0, u+0, a+0, b+0}'))
-    hook_com[staged]=""
-    hook_com[unstaged]=""
-    [[ ${changes[1]} != "0" ]] &&
-        hook_com[staged]="${prt_git_s/0/${changes[1]}}"
-    [[ ${changes[2]} != "0" ]] &&
-        hook_com[unstaged]+="${prt_git_m/0/${changes[2]}}"
-    [[ ${changes[3]} != "0" ]] &&
-        hook_com[unstaged]+="${prt_git_c/0/${changes[3]}}"
-    [[ ${changes[4]} != "0" ]] &&
-        hook_com[unstaged]+="${prt_git_u/0/${changes[4]}}"
+    changes=($(git status --branch --porcelain | awk \
+       '/^##.*ahead/  { ahead=$4 }
+        /^##.*behind/ { behind=$4 }
+        /^##.*,/      { ahead=$4; behind=$6 }
+        /^A/          { staged++ }
+        /^M/          { staged++ }
+        /^R/          { staged++ }
+        /^D/          { staged++ }
+        /^.M/         { modified++ }
+        /^.A/         { modified++ }
+        /^.D/         { modified++ }
+        /^(U.|.U)/    { conflicts++ }
+        /^\?\?/       { untracked++ }
+        END {
+            # Add 0 to make nonempty and coerce to numbers.
+            print staged+0, modified+0, conflicts+0, untracked+0,
+                  ahead+0, behind+0
+        }'))
 
-    if [ -z "${hook_com[unstaged]}${hook_com[staged]}" ]; then
-        # exploit the `staged' variable to indicate a clean repository.
-        hook_com[staged]=" %{%B%F{green}%}✔%{%b%f%}"
-    fi
+    local staged=${changes[1]}
+    local modified=${changes[2]}
+    local conflicts=${changes[3]}
+    local untracked=${changes[4]}
+    local ahead=${changes[5]}
+    local behind=${changes[6]}
 
-    [[ ${changes[5]} != "0" ]] &&
-        hook_com[unstaged]+=${prt_git_a/0/${changes[5]}}
-    [[ ${changes[6]} != "0" ]] &&
-        hook_com[unstaged]+=${prt_git_b/0/${changes[6]}}
+    local msg=""
+    [[ "$staged" != "0" ]] && msg+=" %{%F{green}%}+$staged%{%f%}"
+    [[ "$modified" != "0" ]] && msg+=" %{%F{yellow}%}x$modified%{%f%}"
+    [[ "$conflicts" != "0" ]] && msg+=" %{%B%F{red}%}!$conflicts%{%b%f%}"
+    [[ "$untracked" != "0" ]] && msg+=" %{%F{magenta}%}?$untracked%{%f%}"
+    [[ "$ahead" != "0" ]] && msg+=" %{%F{green}%}→$ahead%{%f%}"
+    [[ "$behind" != "0" ]] && msg+=" %{%F{red}%}←$behind%{%f%}"
 
+    hook_com[misc]="$msg"
 }
 
 # Run the countformat function before returning the message.
