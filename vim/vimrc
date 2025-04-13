@@ -42,6 +42,11 @@ set clipboard-=autoselect
 "   registers containing up to 1000kb
 set viminfo='100,<1000,s1000,h
 
+if empty($XDG_CACHE_HOME)
+    let $XDG_CACHE_HOME="$HOME/.cache"
+endif
+set viminfofile=$XDG_CACHE_HOME/vim/viminfo
+
 set wildmode=list:full
 
 " Turn off error bells
