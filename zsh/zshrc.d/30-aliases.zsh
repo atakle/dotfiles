@@ -31,4 +31,8 @@ alias rm='rm -I'
 alias gti=git
 compdef _git gti=git
 
+# Make wtf honest
+whence -p wtf >/dev/null && \
+    alias wtf='wtf -o'
+
 alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
