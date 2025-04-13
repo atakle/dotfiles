@@ -55,6 +55,9 @@ if has('autocmd')
     autocmd GUIEnter * set visualbell t_vb=
 endif
 
+" Disable the .netrwhist file
+let g:netrw_dirhistmax=0
+
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
