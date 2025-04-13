@@ -3,14 +3,8 @@ autoload -Uz vcs_info
 # Which version control systems to support.
 zstyle ':vcs_info:*' enable git
 
-# Check for changed files. Might be slow for large repos.
-zstyle ':vcs_info:*' check-for-changes true
-
 zstyle ':vcs_info:*' formats       '(%b%m)'
 zstyle ':vcs_info:*' actionformats '(%b%m %a)'
-
-# Get list of unapplied patches.
-zstyle ':vcs_info:*' get-unapplied true
 
 # Populate the %m (misc) part of the prompt with custom information.
 function +vi-git-countformat() {
