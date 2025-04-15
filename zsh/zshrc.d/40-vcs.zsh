@@ -19,8 +19,7 @@ function +vi-git-countformat() {
         return
     fi
 
-    local -a changes
-    changes=($(git status --branch --porcelain | awk \
+    git status --branch --porcelain | awk \
        '/^##.*ahead/  { ahead=$4 }
         /^##.*behind/ { behind=$4 }
         /^##.*,/      { ahead=$4; behind=$6 }
@@ -37,14 +36,8 @@ function +vi-git-countformat() {
             # Add 0 to make nonempty and coerce to numbers.
             print staged+0, modified+0, conflicts+0, untracked+0,
                   ahead+0, behind+0
-        }'))
-
-    local staged=${changes[1]}
-    local modified=${changes[2]}
-    local conflicts=${changes[3]}
-    local untracked=${changes[4]}
-    local ahead=${changes[5]}
-    local behind=${changes[6]}
+        }' \
+    | read staged modified conflicts untracked ahead behind
 
     local msg=""
     [[ "$staged" != "0" ]] && msg+=" %{%F{green}%}+$staged%{%f%}"
@@ -54,6 +47,7 @@ function +vi-git-countformat() {
     [[ "$ahead" != "0" ]] && msg+=" %{%F{green}%}→$ahead%{%f%}"
     [[ "$behind" != "0" ]] && msg+=" %{%F{red}%}←$behind%{%f%}"
 
+    [[ -z "$msg" ]] && msg=" %{%B%F{green}%}✔%{%b%f%}"
     hook_com[misc]="$msg"
 }
 
