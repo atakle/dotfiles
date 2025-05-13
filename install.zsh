@@ -63,7 +63,8 @@ function run {
     $op "$PWD/editrc" "$EDITRC"
     $op "$PWD/inputrc" "$INPUTRC"
     $op "$PWD/screenrc" "$SCREENRC"
-    $op "$PWD/xcompose/dotXCompose" "$XCOMPOSEFILE"
+    $op "$PWD/xcompose" "$XCOMPOSEFILE"
+
 
     if [[ -z "$ZDOTDIR" ]]; then
         ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
