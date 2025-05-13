@@ -9,7 +9,7 @@ export EDITRC="$XDG_CONFIG_HOME/editrc"
 export INPUTRC="$XDG_CONFIG_HOME/inputrc"
 export SCREENDIR="$XDG_RUNTIME_DIR/screen"
 export SCREENRC="$XDG_CONFIG_HOME/screenrc"
-export XCOMPOSEFILE="$XDG_CONFIG_HOME/XCompose"
+export XCOMPOSEFILE="$XDG_CONFIG_HOME/xcompose"
 
 export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
