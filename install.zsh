@@ -4,7 +4,7 @@ PROGRAM="$0"
 cd "$(dirname "$(readlink -f "$0")")"
 
 # Get relevant variables.
-source "$PWD/zsh/.zshenv"
+source "$PWD/environment.d/50-xdg-dirs.conf"
 
 # Default options
 op="mklink"
@@ -56,6 +56,9 @@ function rmlink {
 }
 
 function run {
+    $op "$PWD/environment.d/50-xdg-dirs.conf" \
+        "$XDG_CONFIG_HOME/environment.d/50-xdg-dirs.conf"
+
     $op "$PWD/gitconfig" "$XDG_CONFIG_HOME/git/config"
     $op "$PWD/lesskey" "$XDG_CONFIG_HOME/lesskey"
     $op "$PWD/vim" "$XDG_CONFIG_HOME/vim"
