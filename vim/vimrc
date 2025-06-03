@@ -277,6 +277,9 @@ endif
 
 " --- Filetype-specific settings --- {{{
 
+" Load the editorconfig plugin, if it's available.
+silent! packadd editorconfig
+
 if has("autocmd")
 
   " --- C++ filetype settings --- {{{
