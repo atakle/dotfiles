@@ -1,1 +1,7 @@
+# Ignore the other init files in $ZDOTDIR
+/zsh/.zprofile
+/zsh/.zlogin
+/zsh/.zlogout
+
+# Don't track rc scripts ending in '.local.zsh'
 /zsh/zshrc.d/*.local.zsh
