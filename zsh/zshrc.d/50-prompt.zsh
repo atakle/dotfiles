@@ -48,10 +48,10 @@ _left_prompt() {
 # Construct the right part of the prompt.
 _right_prompt() {
     # Version control information is read from the 'vcs_info_msg_0_' variable.
-    # The display format is defined in 'vcs.zsh'.
+    # The display format is defined in '40-vcs.zsh'.
     local version_control="\${vcs_info_msg_0_}"
 
-    # Battery status display is defined in 'battery.zsh'.
+    # Battery status display is defined in '40-battery.zsh'
     local battery="\$(prompt_battery)"
 
     # Number of background jobs
@@ -59,6 +59,7 @@ _right_prompt() {
     # Display only if at least one:
     local background_jobs="%(1j|$background_jobs_txt|)"
 
+    # Full prompt: '(main ✓) [98%]+ {2}'
     echo "${version_control}${battery}${background_jobs}"
 }
 
