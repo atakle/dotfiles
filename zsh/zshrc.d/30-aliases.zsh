@@ -15,10 +15,13 @@ fi
 # Remove the `screen.' prefix from TERM when using ssh
 alias ssh='TERM=${TERM#screen.} ssh'
 
-alias ls='ls --color=auto'
+alias ls='ls --classify=auto --color=auto'
 alias l='ls -lA'
 alias ll='ls -l'
 alias la='ls -A'
+
+whence -p tree > /dev/null && \
+    alias tree='tree -F'
 
 alias po='popd'
 
