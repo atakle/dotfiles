@@ -2,7 +2,7 @@
 # Download and install vim plugins and themes created by other people.
 #
 # The following dependencies are used:
-# - vim-commentary, by Tim Pope (https://github.com/tpope/vim-commentary)
+# - tcomment_vim, by Tom Link (https://github.com/tomtom/tcomment_vim)
 # - vim-repeat, by Tim Pope (https://github.com/tpope/vim-commentary)
 # - vim-surround, by Tim Pope (https://github.com/tpope/vim-surround)
 # - herald colour scheme, by Fabio Cevasco (https://h3rald.com/herald-vim-color-scheme/)
@@ -24,8 +24,8 @@ function download {
     --create-dirs \
     --output-dir "$DOWNLOAD_DIR" \
     --skip-existing \
-    "https://github.com/tpope/vim-commentary/archive/refs/tags/v1.3.tar.gz" \
-    --output "vim-commentary-1.3.tar.gz" \
+    "https://github.com/tomtom/tcomment_vim/archive/refs/tags/4.00.tar.gz" \
+    --output "tcomment_vim-4.00.tar.gz" \
     "https://github.com/tpope/vim-repeat/archive/refs/tags/v1.2.tar.gz" \
     --output "vim-repeat-1.2.tar.gz" \
     "https://github.com/tpope/vim-surround/archive/refs/tags/v2.2.tar.gz" \
@@ -46,9 +46,9 @@ function install_plugins {
   [[ -d "$install_dir" ]] || mkdir -p "$install_dir"
 
   local plugins=(
+    "tcomment_vim-4.00.tar.gz"
     "vim-repeat-1.2.tar.gz"
     "vim-surround-2.2.tar.gz"
-    "vim-commentary-1.3.tar.gz"
   )
 
   for file in "${plugins[@]}"; do

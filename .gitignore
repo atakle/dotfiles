@@ -8,6 +8,6 @@
 
 # Downloaded content
 /vim/colors/herald.vim
-/vim/pack/editing/start/vim-commentary-1.3
+/vim/pack/editing/start/tcomment_vim-4.00
 /vim/pack/editing/start/vim-repeat-1.2
 /vim/pack/editing/start/vim-surround-2.2
