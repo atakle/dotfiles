@@ -5,3 +5,9 @@
 
 # Don't track rc scripts ending in '.local.zsh'
 /zsh/zshrc.d/*.local.zsh
+
+# Downloaded content
+/vim/colors/herald.vim
+/vim/pack/editing/start/vim-commentary-1.3
+/vim/pack/editing/start/vim-repeat-1.2
+/vim/pack/editing/start/vim-surround-2.2
