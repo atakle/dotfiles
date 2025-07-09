@@ -1,5 +1,5 @@
 if [[ -z "$ZDOTDIR" ]]; then
-    echo "ZDOTDIR is not defined. Skipping rc scripts" 1>&2
+    echo "ZDOTDIR is not defined. Skipping zshrc scripts" 1>&2
     return 1
 fi
 
