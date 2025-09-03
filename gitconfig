@@ -44,6 +44,3 @@
 
 [init]
 	defaultbranch = main
-
-[help]
-	autocorrect = prompt
