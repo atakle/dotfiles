@@ -16,7 +16,7 @@ if whence -p screen > /dev/null; then
             exec screen -m
         fi
     else
-        exec screen -RR
+        exec screen
     fi
 
 
