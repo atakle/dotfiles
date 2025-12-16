@@ -10,7 +10,15 @@
  	hi VertSplit      guibg=#1F1F1F guifg=#FFEE68 gui=none
  	hi SignColumn     guibg=#1F1F1F guifg=#BF81FA gui=none
  	hi NonText        guibg=#1F1F1F guifg=#FC6984 gui=none
-@@ -51,8 +51,8 @@
+@@ -42,6 +42,7 @@
+ 	hi LineNr         guibg=#000000 guifg=#696567 gui=none
+ 	hi StatusLine     guibg=#000000 guifg=#696567 gui=none
+ 	hi StatusLineNC   guibg=#25365a guifg=#696567 gui=none
++	hi ColorColumn    guibg=#000000 guifg=#696567 gui=none
+ 
+ 	" -> Messages
+ 	hi ErrorMsg       guibg=#A32024 guifg=#D0D0D0 gui=none
+@@ -51,8 +52,8 @@
  	hi ModeMsg        guibg=#1F1F1F guifg=#FFA500 gui=none
  
  	" -> Search 
@@ -21,7 +29,7 @@
  
  	" -> Diff
  	hi DiffAdd        guibg=#006124 guifg=#ED9000 gui=none
-@@ -78,20 +78,22 @@
+@@ -78,20 +79,22 @@
  
  	" -> Code
  	hi Comment        guibg=#1F1F1F guifg=#696567 gui=none
@@ -47,7 +55,7 @@
  	hi Type           guibg=#1F1F1F guifg=#FFEE68 gui=none
  	hi Exception      guibg=#1F1F1F guifg=#FC4234 gui=none
  
-@@ -108,7 +110,7 @@
+@@ -108,7 +111,7 @@
  
  	" -> Text; Miscellaneous
  	hi Normal         ctermbg=234  ctermfg=252   cterm=none
@@ -56,7 +64,15 @@
  	hi VertSplit      ctermbg=234  ctermfg=227   cterm=none
  	hi SignColumn     ctermbg=234  ctermfg=141   cterm=none
  	hi NonText        ctermbg=234  ctermfg=204   cterm=none
-@@ -138,8 +140,8 @@
+@@ -129,6 +132,7 @@
+ 	hi LineNr         ctermbg=0    ctermfg=241   cterm=none
+ 	hi StatusLine     ctermbg=0    ctermfg=241   cterm=none
+ 	hi StatusLineNC   ctermbg=237  ctermfg=241   cterm=none
++	hi ColorColumn    ctermbg=0    ctermfg=241   cterm=none
+ 
+ 	" -> Messages
+ 	hi ErrorMsg       ctermbg=124  ctermfg=252   cterm=none
+@@ -138,8 +142,8 @@
  	hi ModeMsg        ctermbg=234  ctermfg=214   cterm=none
  
  	" -> Search 
@@ -67,7 +83,7 @@
  
  	" -> Diff
  	hi DiffAdd        ctermbg=22   ctermfg=208   cterm=none
-@@ -165,20 +167,22 @@
+@@ -165,20 +169,22 @@
  
  	" -> Code
  	hi Comment        ctermbg=234  ctermfg=241   cterm=none
@@ -93,7 +109,7 @@
  	hi Type           ctermbg=234  ctermfg=227   cterm=none
  	hi Exception      ctermbg=234  ctermfg=203   cterm=none 
  
-@@ -195,7 +199,7 @@
+@@ -195,7 +201,7 @@
  
  	" -> Text; Miscellaneous
  	hi Normal         ctermbg=8  ctermfg=15 cterm=none
@@ -102,7 +118,15 @@
  	hi VertSplit      ctermbg=8  ctermfg=14  cterm=none
  	hi SignColumn     ctermbg=8  ctermfg=5  cterm=none
    hi NonText        ctermbg=8  ctermfg=4  cterm=none
-@@ -225,8 +229,8 @@
+@@ -216,6 +222,7 @@
+   hi LineNr         ctermbg=0  ctermfg=7  cterm=none
+   hi StatusLine     ctermbg=0  ctermfg=7  cterm=none
+   hi StatusLineNC   ctermbg=0  ctermfg=7  cterm=none
++  hi ColorColumn    ctermbg=0  ctermfg=7  cterm=none
+ 
+   " -> Messages
+   hi ErrorMsg       ctermbg=4  ctermfg=7  cterm=none
+@@ -225,8 +232,8 @@
    hi ModeMsg        ctermbg=8  ctermfg=14 cterm=none
  
    " -> Search 
@@ -113,7 +137,7 @@
  
    " -> Diff
    hi DiffAdd        ctermbg=0  ctermfg=10 cterm=none
-@@ -252,20 +256,22 @@
+@@ -252,20 +259,22 @@
  
    " -> Code
    hi Comment        ctermbg=8  ctermfg=7  cterm=none
@@ -139,7 +163,7 @@
    hi Type           ctermbg=8  ctermfg=14 cterm=none
    hi Exception      ctermbg=8  ctermfg=12 cterm=none
  
-@@ -283,7 +289,7 @@
+@@ -283,7 +292,7 @@
  
  	" -> Text; Miscellaneous
  	hi Normal         ctermbg=8  ctermfg=7  cterm=none
@@ -148,7 +172,15 @@
  	hi VertSplit      ctermbg=8  ctermfg=6  cterm=none
  	hi SignColumn     ctermbg=8  ctermfg=5  cterm=none
    hi NonText        ctermbg=8  ctermfg=4  cterm=none
-@@ -313,8 +319,8 @@
+@@ -304,6 +313,7 @@
+   hi LineNr         ctermbg=0  ctermfg=7  cterm=none
+   hi StatusLine     ctermbg=0  ctermfg=7  cterm=none
+   hi StatusLineNC   ctermbg=0  ctermfg=7  cterm=none
++  hi ColorColumn    ctermbg=0  ctermfg=7  cterm=none
+ 
+   " -> Messages
+   hi ErrorMsg       ctermbg=4  ctermfg=7  cterm=none
+@@ -313,8 +323,8 @@
    hi ModeMsg        ctermbg=8  ctermfg=6  cterm=none
  
    " -> Search 
@@ -159,7 +191,7 @@
  
    " -> Diff
    hi DiffAdd        ctermbg=0  ctermfg=2  cterm=none
-@@ -340,20 +346,24 @@
+@@ -340,20 +350,24 @@
  
    " -> Code
    hi Comment        ctermbg=8  ctermfg=7  cterm=none
@@ -185,7 +217,7 @@
    hi Type           ctermbg=8  ctermfg=6 cterm=none
    hi Exception      ctermbg=8  ctermfg=4 cterm=none
  
-@@ -378,8 +388,15 @@
+@@ -378,8 +392,15 @@
  
  " Spellcheck formatting
  if has("spell")
