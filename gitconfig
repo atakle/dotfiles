@@ -40,7 +40,6 @@
 
 [rebase]
 	autoSquash = true
-	updateRefs = true
 
 [init]
 	defaultbranch = main
